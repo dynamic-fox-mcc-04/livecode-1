@@ -21,6 +21,10 @@ function login(event) {
         localStorage.setItem('token', response.access_token)
         showDashboard()
     }).fail(err => {
+        $('#fail').empty()
+        $('#fail').append(err.responseJSON)
+        $('#fail').show(1000)
+        $('#fail').hide(1000)
         console.log(err)
     })
 }
@@ -74,6 +78,10 @@ function getRecipe(event) {
         })
 
     }).fail(err => {
+        $('#fail').empty()
+        $('#fail').append(err.responseJSON)
+        $('#fail').show(1000)
+        $('#fail').hide(1000)
         console.log(err)
     })
 }
@@ -89,6 +97,10 @@ function deleteRecipe(id) {
         console.log(response)
         getRecipe(event)
     }).fail(err => {
+        $('#fail').empty()
+        $('#fail').append(err.responseJSON)
+        $('#fail').show(1000)
+        $('#fail').hide(1000)
         console.log(err)
     })
 }
@@ -101,6 +113,7 @@ function logout(event) {
 
 $('document').ready(function() {
     let token = localStorage.getItem('token')
+    $('#fail').hide()
     console.log('jquery on!')
     if(!token) {
         showLandingPage()
