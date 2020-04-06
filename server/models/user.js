@@ -1,5 +1,6 @@
 'use strict';
 const {encryptPassword} = require("../helper/bcrypt")
+
 module.exports = (sequelize, DataTypes) => {
   class User extends sequelize.Sequelize.Model {}
   User.init({

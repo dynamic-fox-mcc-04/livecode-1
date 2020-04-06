@@ -1,4 +1,4 @@
-const {Food} = require("../models")
+const {Food} = require("../models") 
 
 class FoodController {
     static findAll (req, res, next){
