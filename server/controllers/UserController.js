@@ -49,7 +49,6 @@ class UserController {
                     email: foundUser.dataValues.email
                 }
                     const access_token = generateToken(payload);
-                    console.log(password)
                     let verify = decrypt(password, foundUser.password)
                     if(verify == true) {
                         return res.status(200).json({

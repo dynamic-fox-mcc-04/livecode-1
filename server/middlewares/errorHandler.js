@@ -1,5 +1,4 @@
 function errorHandler(err, req, res, next) {
-    console.log(err)
     if(err.name == 'SequelizeValidationError') {
         const errors = err.errors.map(el => {
             message = el.message
