@@ -1,7 +1,7 @@
 
 module.exports = (err, req, res, next) => {
     if (err) {
-        switch (err.name) {
+        switch (err) {
             case value:
 
                 break;
