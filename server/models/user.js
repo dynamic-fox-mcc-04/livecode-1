@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         password: DataTypes.STRING
     }, {
         sequelize,
-        hooks: {
-            beforeCreate(User, options) {
-                User.password = encryptPassword(User.password)
-            }
-        },
+        // hooks: {
+        //     beforeCreate(User, options) {
+        //         User.password = encryptPassword(User.password)
+        //     }
+        // },
         validate: {
             checkEmpty() {
                 if (this.email == '' || this.password == '') {
