@@ -1,6 +1,13 @@
 const bcrypt = require('bcryptjs')
 
 const encrypt = (password) => {
-    const salt = bcrypt.genSaltSync();
-    const hash = bcrypt.hashSync(myPlaintextPassword, salt);
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+    return hash
 }
+
+const decrypt = (password, hash) => {
+    return bcrypt.compareSync(password, hash)
+}
+
+module.exports =  { encrypt, decrypt }

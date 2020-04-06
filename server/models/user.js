@@ -1,4 +1,6 @@
 'use strict';
+const { encrypt } = require('../helpers/bcrypt')
+
 module.exports = (sequelize, DataTypes) => {
   class User extends sequelize.Sequelize.Model {
     get id() {
@@ -28,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
+    hooks: {
+      beforeCreate: (User, options) => {
+        User.password = encrypt(User.password)
+      }
+    },
     modelName: 'User'
   })
   User.associate = function(models) {
