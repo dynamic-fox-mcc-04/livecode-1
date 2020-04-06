@@ -10,8 +10,6 @@ $(document).ready(function() {
 
     $('#Login').on('submit', function(e) {
         e.preventDefault()
-        console.log($('#exampleInputEmail1').val())
-        console.log($('#exampleInputPassword').val())
         $.ajax({
             url: 'http://localhost:3000/login',
             method: 'POST',
@@ -21,22 +19,22 @@ $(document).ready(function() {
             }
         })
             .done(function(result) {
-                console.log(result)
+                $('#exampleInputEmail1').val('')
+                $('#exampleInputPassword').val('')
                 localStorage.setItem('access_token', result.access_token)
                 GenerateFood()
+                SignedIn()
             
             })
             .catch(function(err) {
-                console.log('ERROR LOGIN')
+                $('#exampleInputEmail1').val('')
+                $('#exampleInputPassword').val('')
+                console.log(err.responseJSON.message)
             })
     })
 
     $("#CreateFood").on('submit', function(e) {
         e.preventDefault()
-        // console.log($('#CreateTitle').val())
-        // console.log($('#CreatePrice').val())
-        // console.log($('#CreateIngredient').val())
-        // console.log($('#CreateTag').val())
         $.ajax({
             url: 'http://localhost:3000/foods',
             method: 'POST',
@@ -51,10 +49,22 @@ $(document).ready(function() {
             }
         })
             .done(function(result) {
+                $('#CreateTitle').val('')
+                $('#CreatePrice').val('')
+                $('#CreateIngredient').val('')
+                $('#CreateTag').val('')
                 GenerateFood()
             })
             .fail(function(err) {
-                console.log(`Failed to Add Food ${err}`)
+                $('#CreateTitle').val('')
+                $('#CreatePrice').val('')
+                $('#CreateIngredient').val('')
+                $('#CreateTag').val('')
+                console.log(err.responseJSON.message)
             })
+    })
+    $('#Logout').on('click', function(e) {
+        e.preventDefault()
+        Logout()
     })
 })

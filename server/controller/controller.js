@@ -39,13 +39,13 @@ class Controller {
                     }
                     else {
                         return res.status(400).json({
-                            msg: 'Wrong Email / Password'
+                            message: 'Wrong Email / Password'
                         })
                     }
                 }
                 else {
                     return res.status(400).json({
-                        msg: 'User Does Not Exist!!'
+                        message: 'User Does Not Exist!!'
                     })
                 }
             })
@@ -69,7 +69,7 @@ class Controller {
             .catch(function(err) {
                 console.log(err)
                 return res.status(400).json({
-                    msg: "Failed to Fetch Food List"
+                    message: "Failed to Fetch Food List"
                 })
             })
     }
@@ -97,6 +97,9 @@ class Controller {
             })
             .catch(function(err) {
                 console.log(err)
+                return res.status(400).json({
+                    message: "Please Fill It Correctly!!"
+                })
             })
     }
 

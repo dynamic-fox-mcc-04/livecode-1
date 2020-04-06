@@ -1,13 +1,19 @@
 function NotSignedIn() {
-    console.log('not signed in')
     $('#LoginPage').show()
     $('#MainPage').hide()
 }
 function SignedIn() {
-    console.log('signed in')
     $('#LoginPage').hide()
     $('#MainPage').show()
 }
+
+function Logout() {
+    $('#LoginPage').show()
+    $('#MainPage').hide()
+    $('#FoodList').empty()
+    localStorage.removeItem('access_token')
+}
+
 function GenerateFood() {
     $.ajax({
         url: 'http://localhost:3000/foods',
@@ -17,7 +23,6 @@ function GenerateFood() {
         }
     })
         .done(function(result) {
-            console.log(result)
             $('#FoodList').empty()
             for(let i = 0; i < result.length; i++) {
                 $('#FoodList').append(`
@@ -46,7 +51,6 @@ function GenerateFood() {
 
                 $(`#Delete-${result[i].id}`).on('click', function(e) {
                     e.preventDefault()
-                    console.log(`#Delete-${result[i].id}`)
                     $.ajax({
                         url: `http://localhost:3000/foods/${result[i].id}`,
                         method: 'DELETE',
