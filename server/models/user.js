@@ -2,7 +2,15 @@
 const {encrypt} = require("../helpers/bcrypt")
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    email: DataTypes.STRING,
+    email: 
+    {
+      type : DataTypes.STRING,
+      validate :
+      {
+        isEmail : {msg : "Input email format"}
+      },
+      unique : true
+    },
     password: DataTypes.STRING
   }, {
     hooks:

@@ -4,7 +4,7 @@ const {decrypt} = require("../helpers/bcrypt");
 const {generateToken} = require("../helpers/jwt");
 const {authentication} = require("../middlewares/authentication");
 
-router.post("/register", (req, res) =>
+router.post("/register", (req, res, next) =>
     {
         let {email, password} = req.body;
         let data = {email, password};
@@ -16,12 +16,13 @@ router.post("/register", (req, res) =>
         })
         .catch(err =>
         {
-            console.log(err);
+            // console.log(err);
+            return next(err);
             return res.status(500).json({error : "Internal Server Error"})
         })
     });
 
-router.post("/login", (req, res) =>
+router.post("/login", (req, res, next) =>
     {
         let {email, password} = req.body;
 
@@ -42,13 +43,14 @@ router.post("/login", (req, res) =>
         })
         .catch(err => 
         {
+            return next(err);
             return res.status(500).json({error : "Internal Server Error"});
         })
     });
 
 router.use(authentication);
 
-router.post("/foods", (req,res) =>
+router.post("/foods", (req, res, next) =>
     {
         let {title, price, ingredients, tag} = req.body;
         let user_id = req.user_id;
@@ -71,11 +73,12 @@ router.post("/foods", (req,res) =>
         .catch(err =>
         {
             // console.log(err)
+            return next(err);
             return res.status(500).json({error : "Internal Server Error"});
         })
     });
 
-router.get("/foods", (req, res) =>
+router.get("/foods", (req, res, next) =>
     {
         let UserId = String(req.user_id);
         Food.findAll({where : {UserId}})
@@ -86,11 +89,12 @@ router.get("/foods", (req, res) =>
         .catch(err =>
         {
             // return res.status(500).json(err);
+            return next(err);
             return res.status(500).json({error : "Internal Server Error"});
         })
     });
 
-router.delete("/foods/:id", (req, res) =>
+router.delete("/foods/:id", (req, res, next) =>
     {
         let {id} = req.params;
         Food.destroy({where : {id}})
@@ -100,6 +104,7 @@ router.delete("/foods/:id", (req, res) =>
         })
         .catch(err =>
         {
+            return next(err);
             return res.status(500).json({error : "Internal Server Error"});
         })
     })
