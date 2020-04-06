@@ -40,7 +40,12 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
-    tag: DataTypes.STRING
+    tag: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    }
   }, {
     sequelize,
     modelName: 'Food'

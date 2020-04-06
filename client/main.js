@@ -2,6 +2,10 @@ const baseUrl = `http://localhost:3000`
 
 $( document ).ready(function() {
     auth()
+    $('#errorTitle').hide()
+    $('#errorPrice').hide()
+    $('#errorIngredients').hide()
+    $('#errorLogin').hide()
 })
 
 
@@ -18,12 +22,17 @@ const login = (e) => {
         }
     })
     .done(data => {
+        $('#exampleInputPassword').val('')
         localStorage.setItem('access_token', data.token)
+        $('#errorLogin').hide()
         auth()
         console.log(data)
     })
     .fail(err => {
-        console.log(err.responseJSON)
+        console.log(err.responseJSON.errors)
+        $('#errorLogin').empty()
+        $('#errorLogin').append(err.responseJSON.errors[0].message)
+        $('#errorLogin').show()
     })
 
 }
@@ -48,6 +57,9 @@ const auth = () => {
 
 const addFood = (e) => {
     e.preventDefault()
+    $('#errorTitle').hide()
+    $('#errorPrice').hide()
+    $('#errorIngredients').hide()
     const title = $('#title').val()
     const price = $('#price').val()
     const ingredients = $('#ingredients').val()
@@ -70,11 +82,30 @@ const addFood = (e) => {
         $('#title').val('')
         $('#price').val('')
         $('#ingredients').val('')
-        $('#tag').val('')
+        $('#errorTitle').hide()
+        $('#errorPrice').hide()
+        $('#errorIngredients').hide()
         readFood()
     })
     .fail(err => {
-        console.log(err.responseJSON)
+        if (err.responseJSON) {
+            err.responseJSON.errors.forEach(el => {
+                if (el.message == 'Validation notEmpty on title failed' ) {
+                    $('#errorTitle').show()
+                } else if (el.message == 'Validation notEmpty on price failed' ) {
+                    $('#errorPrice').show()
+                } else if (el.message == 'Validation notEmpty on ingredients failed' ) {
+                    $('#errorIngredients').show()
+                }
+                console.log(el)
+            })
+        } else {
+            console.log(err)
+        }
+            
+        
+
+
     })
 }
 

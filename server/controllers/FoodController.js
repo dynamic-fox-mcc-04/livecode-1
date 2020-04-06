@@ -27,7 +27,10 @@ class FoodController {
         Food.findAll({
             where: {
                 userId: req.currentuserId
-            }
+            },
+            order: [
+                ['updatedAt', 'DESC'],
+            ]
         })
         .then((result) => {
             return res.status(200).json({
