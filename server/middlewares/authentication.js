@@ -8,7 +8,7 @@ function authentication(req, res, next) {
         User.findByPk(decoded.id)
             .then(user => {
                 if (user) {
-                    req.logged_user = decoded
+                    req.logged_user = decoded.id
                     return next()
                 } else {
                     return next({ status: 401, msg: 'Authentication Failed' })
@@ -20,4 +20,4 @@ function authentication(req, res, next) {
     }
 }
 
-module.exports = authentication
+module.exports = { authentication }
