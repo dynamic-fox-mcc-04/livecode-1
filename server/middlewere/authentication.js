@@ -17,6 +17,15 @@ function authentication(req, res, next) {
             next({ name: 'not authenticated' })
           }
         })
+        .catch(next)
+    }
+    else {
+      next({ name: 'not authenticated' })
     }
   }
+  catch {
+    next({ name: 'not authenticated' })
+  }
 }
+
+module.exports = authentication
