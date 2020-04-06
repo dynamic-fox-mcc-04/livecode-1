@@ -20,6 +20,7 @@ class FoodController{
                 })
             })
     }
+    static findAll (req, res) {}
 }
 
 module.exports= FoodController
