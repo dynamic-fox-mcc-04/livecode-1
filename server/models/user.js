@@ -1,4 +1,6 @@
 'use strict';
+const { encryptPassword } = require('../helpers/bcrypt.js')
+
 module.exports = (sequelize, DataTypes) => {
     class User extends sequelize.Sequelize.Model {}
     User.init({
@@ -14,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         password: DataTypes.STRING
     }, {
         sequelize,
+        hooks: {
+            beforeCreate(User, options) {
+                User.password = encryptPassword(User.password)
+            }
+        },
         validate: {
             checkEmpty() {
                 if (this.email == '' || this.password == '') {
