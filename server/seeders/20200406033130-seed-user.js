@@ -3,7 +3,7 @@ const { hashPassword } = require('../helpers/bcrypt')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.bulkInsert('Users', [{
+    return queryInterface.bulkInsert('Users', [{
       email: 'fadhil@mail.com',
       password: hashPassword('fadhilman'),
       createdAt: new Date(),
@@ -15,7 +15,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }
-  ])
+  ], {})
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -29,6 +29,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('Users', null, {})
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

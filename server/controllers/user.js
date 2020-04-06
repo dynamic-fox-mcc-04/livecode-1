@@ -1,4 +1,5 @@
 const { User } = require('../models/index')
+const { comparePassword } = require('../helpers/bcrypt')
 const { createToken } = require('../helpers/jwt')
 
 class UserController {
@@ -31,8 +32,23 @@ class UserController {
         User.findOne({ where: { email: user.email } })
             .then(response => {
                 if(!response) {
-                    throw {}
+                    return res.status(400).json({ type: 'Bad Req', msg: 'Wrong email/pass' })
+                } else if(!comparePassword(user.password, response.password)) {
+                    return res.status(400).json({ type: 'Bad Req', msg: 'Wrong email/pass' })
+                } else {
+                    let payload = {
+                        id: response.id,
+                        email: response.email
+                    }
+                    let token = createToken(payload)
+                    return res.status(200).json({
+                        email: payload.email,
+                        token: token
+                    })
                 }
+            })
+            .catch(err => {
+                res.status(500).json(err)
             })
     }
 }
