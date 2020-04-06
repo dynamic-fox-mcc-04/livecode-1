@@ -41,3 +41,30 @@ function logout() {
     localStorage.clear()
     authentication()
 }
+
+function createFood(event){
+    event.preventDefault();
+    let title= $('#titleAdd').val()
+    let price= $('#priceAdd').val()
+    let ingredients= $('#ingredientsAdd').val()
+    let tag= $('#tagAdd').val()
+    $.ajax({
+        method:'post',
+        url:baseUrl+'/foods',
+        headers: {
+            access_token: localStorage.access_token
+        },
+        data: {
+            title,
+            price,
+            ingredients,
+            tag
+        }
+    })
+    .done(()=> {
+        authentication()
+    })
+    .fail(err => {
+        console.log(err.responseJSON.errors.map(el=> el.message))
+    })
+}
