@@ -9,6 +9,6 @@ router.post('/login', users.login)
 router.use(auth)
 router.post('/foods',foods.create)
 router.get('/foods', foods.read)
-router.delete('/foods/:id', authorize, foods.delete)
+router.delete('/foods/:id',foods.delete)
 
 module.exports = router
