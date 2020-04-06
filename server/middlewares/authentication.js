@@ -5,7 +5,7 @@ function authentication(req, res, next)
 {
     try {
         let id = verify(req.headers.token);
-
+        console.log(id)
         User.findByPk(id)
         .then(data =>
         {
@@ -20,4 +20,4 @@ function authentication(req, res, next)
       }
 }
 
-module.exports = authentication;
+module.exports = {authentication};
