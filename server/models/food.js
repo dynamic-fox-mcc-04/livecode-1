@@ -17,8 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       references: sequelize.Sequelize.User
     }
-  },
-  )
+  }, {
+    sequelize,
+    modelName: 'Food'
+  })
 
   Food.associate = function (models) {
     // associations can be defined here

@@ -21,10 +21,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       UserId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references: {
           model: 'Users',
-          references: 'id'
+          key: 'id'
         }
       },
       createdAt: {
