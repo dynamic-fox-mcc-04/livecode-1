@@ -16,8 +16,8 @@ class UserController {
                 }
                 let token = createToken(payload)
                 return res.status(201).json({
-                    email: payload.email,
-                    token: token
+                    id: payload.id,
+                    email: payload.email
                 })
             })
             .catch(err => {
@@ -42,8 +42,7 @@ class UserController {
                     }
                     let token = createToken(payload)
                     return res.status(200).json({
-                        email: payload.email,
-                        token: token
+                        access_token: token
                     })
                 }
             })
