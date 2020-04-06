@@ -8,7 +8,7 @@ function fetchFood() {
   })
     .done((food) => {
       $('#food-list').empty()
-      for(let i = 0; i < food.length ; i++) {
+      for (let i = 0; i < food.length; i++) {
         $('#food-list').append(`
         <div class="card" id="${food[i].id}">
           <div class="card-body pb-0">
@@ -20,7 +20,7 @@ function fetchFood() {
               <div class="col-3 d-flex align-items-baseline">
                 <i class="fas fa-tag text-grey mr-2"></i>
                 <p class="text-grey">${food[i].tag}</p>
-                <button class="fas fa-trash text-danger ml-auto cursor-pointer"></button>
+                <button onclick="deleteFood(${food[i].id})" class="fas fa-trash text-danger ml-auto cursor-pointer"></button>
               </div>
             </div>
             <div class="card-body border-bottom">
@@ -31,6 +31,27 @@ function fetchFood() {
         </div>
         `)
       }
+    })
+    .fail(err => {
+      console.log(err)
+    })
+}
+
+function deleteFood(id) {
+  $.ajax({
+    method: 'DELETE',
+    url: `http://localhost:3000/foods/${id}`,
+    headers: {
+      token: localStorage.getItem('token')
+    }
+  })
+    .done(_ => {
+      $(`#${id}`).remove()
+      $('#login-page').hide()
+      $('#dashboard-page').show()
+    })
+    .fail(err => {
+      console.log(err)
     })
 }
 
@@ -79,21 +100,21 @@ $(document).ready(function () {
     $.ajax({
       method: 'POST',
       url: 'http://localhost:3000/foods',
-      headers : {
+      headers: {
         token: localStorage.getItem('token')
       },
       data: {
         title, price, ingredients, tag
       }
     })
-    .done((newFood) => {
-      $('#login-page').hide()
-      $('#dashboard-page').show()
-      fetchFood()
-    })
-    .fail(err => {
-      console.log(err)
-    })
+      .done((newFood) => {
+        $('#login-page').hide()
+        $('#dashboard-page').show()
+        fetchFood()
+      })
+      .fail(err => {
+        console.log(err)
+      })
   })
 
   $('#logout-btn').on('click', function () {
