@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>My Foods Menu</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://use.typekit.net/nhw3aqu.css" />
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body class="background">
+
+  <!-- Login -->
+  <section class="login-page">
+    <div class="container my-3">
+        <div class="row">
+          <div class="col-12 p-0 text-center">
+            <img src="/assets/security.svg" alt="" style="height:40%;" />
+            <h5 class="font-weight-light mb-3">You shall not pass, please verify your identity</h5>
+            <div class="row">
+              <div class="col-md-6 mx-auto">
+                <form onsubmit="login(event)">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" class="text-left">Email address</label>
+                    <input type="email" class="form-control" id="input-email" name="input-email" aria-describedby="emailHelp"
+                      placeholder="Enter email" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword">Password</label>
+                    <input type="password" class="form-control" id="input-password" name="input-password" aria-describedby="emailHelp"
+                      placeholder="Enter password" required />
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" id="btn-login">Log In</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+<section class="dashboard-app">
+    <!-- Full App -->
+    <div class="container my-3">
+      <nav class="navbar navbar-light bg-light">
+        <button class="btn btn-primary ml-auto" onclick="logout()">
+          Logout
+        </button>
+      </nav>
+      <div class="row">
+  
+        <!-- Add New Food -->
+        <div class="col-md-10" id="clear-page">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="font-weight-light mb-3">Add New Food</h5>
+              <form onsubmit="createFood()">
+                <div class="row">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control my-2" placeholder="Food name" id="name-food" name="name-food">
+                    <input type="price" class="form-control my-2" placeholder="Price" min="0" id="price-food" name="price-food">
+                    <div class="form-group my-2">
+                      <textarea class="form-control" rows="3" placeholder="Ingredients" id="ingredients-food" name="ingredients-food"></textarea>
+                    </div>
+                    <label for="tag">Choose food tag:</label>
+                    <select class="form-control" name="tag-food" id="tag-food">
+                      <option value="ayam">ayam</option>
+                      <option value="ikan">ikan</option>
+                      <option value="other">other</option>
+                    </select>
+                  </div>
+                  <div class="col-md-8 mx-auto mt-3"><button class="btn btn-primary btn-block"
+                      type="submit" id="btn-create">Submit</button></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="pb-0 col-12">
+          <div class="card-body pb-0">
+            <h3 class="font-weight-light">My Foods</h3>
+          </div>
+        </div>
+  
+        <!-- List Food -->
+        <div class="col-md-10" id="show-here">
+
+        </div>
+      </div>
+    </div>
+</section>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
