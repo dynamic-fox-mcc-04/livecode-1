@@ -1,4 +1,7 @@
 'use strict';
+
+const { encryptPassword } = require("../helpers/bcrypt.js")
+
 module.exports = (sequelize, DataTypes) => {
   // const User = sequelize.define('User', {
   //   email: DataTypes.STRING,
@@ -28,6 +31,11 @@ module.exports = (sequelize, DataTypes) => {
     // }
   }, {
     // Other model options go here
+    hooks:{
+      beforeCreate: (user, options) => {
+        user.password = encryptPassword(user.password)
+      }
+    },
     sequelize, // We need to pass the connection instance
     modelName: 'User' // We need to choose the model name
   });
