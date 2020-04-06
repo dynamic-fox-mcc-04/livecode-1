@@ -9,15 +9,23 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
+        allowNull: false,
+        unique : true,
         type: Sequelize.STRING
       },
       price: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       ingredients: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       tag: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      UserId: {
         type: Sequelize.STRING
       },
       createdAt: {
