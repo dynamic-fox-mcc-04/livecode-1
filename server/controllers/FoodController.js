@@ -4,8 +4,10 @@ class FoodController {
     static read(req, res, next) {
         return models.Food.findAll({ where: { UserId: req.loggedUserId } })
             .then(result => {
+                console.log(`findall food`)
+                console.log(result)
                 return res.status(200).json({
-                    result
+                    Foods: result
                 })
             })
             .catch(err => {
@@ -14,10 +16,14 @@ class FoodController {
     }
 
     static create(req, res, next) {
+        console.log(`create food`)
         const { title, price, ingredients, tag } = req.body
-        const data = { title, price, ingredients, tag }
+        const data = { title, price, ingredients, tag, UserId: req.loggedUserId }
+        console.log(data)
         return models.Food.create(data)
             .then(result => {
+                console.log(`ini result`)
+                console.log(result)
                 return res.status(201).json({
                     result
                 })
