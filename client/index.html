@@ -101,17 +101,17 @@
         <div class="card mb-4">
           <div class="card-body">
             <h5 class="font-weight-light mb-3">Add New Food</h5>
-            <form>
+            <form onsubmit="createFood(event)">
               <div class="row">
                 <div class="col-md-12">
-                  <input type="text" class="form-control my-2" placeholder="Food name">
-                  <input type="price" class="form-control my-2" placeholder="Price" min="0">
+                  <input type="text" class="form-control my-2" id="title" placeholder="Food name">
+                  <input type="price" class="form-control my-2" id="price" placeholder="Price" min="0">
                   <div class="form-group my-2">
-                    <textarea class="form-control" rows="3" placeholder="Ingredients"></textarea>
+                    <textarea class="form-control" rows="3" id="ingredients" placeholder="Ingredients"></textarea>
                   </div>
                   <label for="tag">Choose food tag:</label>
-                  <select class="form-control">
-                    <option value="ayam">ayam</option>
+                  <select class="form-control" id="tag" >
+                    <option value="ayam" selected>ayam</option>
                     <option value="ikan">ikan</option>
                     <option value="other">other</option>
                   </select>
@@ -130,8 +130,21 @@
         </div>
       </div>
 
+      <table border>
+        <thead>
+            <th>Title</th>
+            <th>Ingredients</th>
+            <th>Description</th>
+            <th>Tag</th>
+            <th>Action</th>
+        </thead>
+        <tbody class = "foodList">
+
+        </tbody>
+      </table>
+
       <!-- List Food -->
-      <div class="col-md-10">
+      <!-- <div class="col-md-10">
         <div class="card">
           <div class="card-body pb-0">
             <div class="d-flex justify-content-between mb-0">
@@ -236,7 +249,7 @@
 
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <script

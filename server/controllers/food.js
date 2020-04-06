@@ -24,12 +24,52 @@ class Controller {
     }
 
     static findAll (req, res) {
-
+        let payload = {
+            UserId: req.currentUserId
+        }
+        Food.findAll({
+            where: {
+                UserId: payload.UserId
+            }
+            // ,
+            // order: [
+            //     ['tag', 'ASC'],
+            //     ['createdAt', 'DSC'],
+            //     ['title', 'ASC']
+            // ]
+        })
+            .then(result => {
+                return res.status(200).json({
+                    result
+                })
+            })
+            .catch(err => {
+                return res.status(500).json({
+                    msg: err
+                })
+            })
     }
 
 
     static delete (req, res) {
+        let { id } = req.params
 
+        Food.destroy({
+            where: {
+                id
+            }
+        })
+            .then(result => {
+                res.status(200).json({
+                    "message": "Successfully delete food from your menu"
+                })
+            })
+
+            .catch(err => {
+                return res.status(500).json({
+                    msg: err
+                })
+            })
     }
 }
 
