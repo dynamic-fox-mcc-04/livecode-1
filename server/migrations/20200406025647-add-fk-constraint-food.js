@@ -2,7 +2,16 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addConstraint()
+    return queryInterface.addConstraint('Food', ['UserId'], {
+      type: 'foreign key',
+      name: 'custom_fkey_UserId',
+      references: { //Required field
+        table: 'Users',
+        field: 'id'
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    });
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -13,6 +22,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
+    return queryInterface.removeConstraint('Food', 'custom_fkey_UserId')
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
