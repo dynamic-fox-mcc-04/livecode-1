@@ -1,7 +1,10 @@
 'use strict';
+
+const { generatePassword } = require('../helpers/bcrypt')
+
 module.exports = (sequelize, DataTypes) => {
 
-    const Model = sequelize.Sequelize
+    const Model = sequelize.Sequelize.Model
 
     class User extends Model {
 
@@ -9,16 +12,20 @@ module.exports = (sequelize, DataTypes) => {
 
     User.init({
         email: {
-            type: DataTypes.STRING,
-            validations: {
-
-            }
+            type: DataTypes.STRING
         },
-        password: DataTypes.STRING
+        password: {
+            type: DataTypes.STRING,
+            hooks: {
+                beforeCreate: (user, options) => {
+                    user.password = generatePassword(password)
+                }
+            }
+        }
     }, { sequelize });
 
     User.associate = function(models) {
-        User.hasMany(models.Food)
+        User.hasMany(models.Food, { foreignKey: userId })
     };
     return User;
 };

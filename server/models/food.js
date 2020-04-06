@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
 
-    const Model = sequelize.Sequelize
+    const Model = sequelize.Sequelize.Model
 
     class Food extends Model {
 
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }, { sequelize });
 
     Food.associate = function(models) {
-        Food.belongsTo(models.User)
+        Food.belongsTo(models.User, { foreignKey: userId })
     };
     return Food;
 };
