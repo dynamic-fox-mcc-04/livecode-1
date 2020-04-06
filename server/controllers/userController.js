@@ -25,6 +25,7 @@ class userController {
     static login(req,res){
         let receivedEmail = req.body.email
         let receivedPassword = req.body.password
+        console.log(receivedEmail, receivedPassword)
         User.findOne({where:{
             email:receivedEmail
         }})
@@ -39,6 +40,7 @@ class userController {
                         id:result.id,
                         email:result.email
                     }
+                    console.log(payload, "PAYLOAD MASUK")
                     let token = generateToken(payload)
                     res.status(200).json({
                         access_token: token
