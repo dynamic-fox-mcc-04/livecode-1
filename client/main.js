@@ -24,7 +24,7 @@ function login(event) {
         $('#fail').empty()
         $('#fail').append(err.responseJSON)
         $('#fail').show(1000)
-        $('#fail').hide(1000)
+        $('#fail').slideUp(500)
         console.log(err)
     })
 }
@@ -81,7 +81,7 @@ function getRecipe(event) {
         $('#fail').empty()
         $('#fail').append(err.responseJSON)
         $('#fail').show(1000)
-        $('#fail').hide(1000)
+        $('#fail').slideUp(500)
         console.log(err)
     })
 }
@@ -100,7 +100,7 @@ function deleteRecipe(id) {
         $('#fail').empty()
         $('#fail').append(err.responseJSON)
         $('#fail').show(1000)
-        $('#fail').hide(1000)
+        $('#fail').slideUp(500)
         console.log(err)
     })
 }
