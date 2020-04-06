@@ -4,10 +4,6 @@ const { generateToken } = require('../helpers/jwt')
 
 class Controller {
 
-    static read(req, res){
-        
-        
-    }
 
     static login(req, res){
         

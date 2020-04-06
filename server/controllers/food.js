@@ -40,9 +40,24 @@ class Controller {
                 message  : err
             })
         })
-        
+    }
 
+    static delete(req, res){
 
+        Food.destroy({
+            where : { id : req.params.id}
+        })
+        .then(() =>{
+            res.status(200).json({
+                "message" : "Successfully delete food from your menu"
+            })
+        })
+        .catch(err => {
+            return  res.status(500).json({
+                name : 'internal server error',
+                message  : err
+            })
+        })
     }
 }
 
