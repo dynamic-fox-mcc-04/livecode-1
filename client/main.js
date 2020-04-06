@@ -65,7 +65,7 @@ function getRecipe(event) {
               <div class="col-3 d-flex align-items-baseline">
                 <i class="fas fa-tag text-grey mr-2"></i>
                 <p class="text-grey">${el.tag}</p>
-                <button onclick="delete(${el.id})" class="fas fa-trash text-danger ml-auto cursor-pointer"></button>
+                <button onclick="deleteRecipe(${el.id})" class="fas fa-trash text-danger ml-auto cursor-pointer"></button>
               </div>
             </div>
             <div class="card-body border-bottom">
@@ -73,6 +73,21 @@ function getRecipe(event) {
             </div>`)
         })
 
+    }).fail(err => {
+        console.log(err)
+    })
+}
+
+function deleteRecipe(id) {
+    $.ajax({
+        method: 'DELETE',
+        url: `http://localhost:3000/foods/${id}`,
+        headers: {
+            access_token: localStorage.getItem('token')
+        }
+    }).done(response => {
+        console.log(response)
+        getRecipe(event)
     }).fail(err => {
         console.log(err)
     })
