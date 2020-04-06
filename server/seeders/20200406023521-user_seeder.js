@@ -1,6 +1,6 @@
 'use strict';
 
-const users = require('./user.json')
+const users = require('../user.json')
 
 users.forEach(el => {
     el.createdAt = new Date()

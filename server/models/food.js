@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     ingredients: DataTypes.STRING,
     tag: DataTypes.STRING
-  })
+  }, {
+    sequelize
+  } )
 
 
-  const Food = sequelize.define('Food', {
-  }, {});
   Food.associate = function(models) {
-    // associations can be defined here
+    Food.belongsTo(models.User)
   };
   return Food;
 };
