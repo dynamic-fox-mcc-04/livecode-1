@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: "Please Input Valid Email"
         },
-        isEmpty: {
+        notEmpty: {
           args: true,
           msg: "Email cannot be Empty"
         }
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           msg: "Please Enter Your Password"
         },
-        isEmpty: {
+        notEmpty: {
           args: true,
           msg: "Password cannot be Empty"
         }
@@ -44,7 +44,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
       sequelize,
-      modelName: "User"
+      modelName: "User",
+      hooks: {
+        beforeCreate(user, options) {
+          user.password = encryptPass(user.password)
+        }
+      }
       } 
   )
 

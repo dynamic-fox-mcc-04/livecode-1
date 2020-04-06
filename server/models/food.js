@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           msg: "Please Enter Your Title"
         },
-        isEmpty: {
+        notEmpty: {
           args: true,
           msg: "Title cannot be Empty"
         }
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           msg: "Please Enter Your Price"
         },
-        isEmpty: {
+        notEmpty: {
           args: true,
           msg: "Price cannot be Empty"
         }
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           msg: "Please Enter Your Ingredients"
         },
-        isEmpty: {
+        notEmpty: {
           args: true,
           msg: "Ingredients cannot be Empty"
         }
@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           msg: "Please Enter Your Tag"
         },
-        isEmpty: {
+        notEmpty: {
           args: true,
           msg: "Tag cannot be Empty"
         }
@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
       sequelize,
-      modelName: "User"
+      modelName: "Food"
       } 
   )
 
