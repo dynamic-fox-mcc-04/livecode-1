@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Foods Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://use.typekit.net/nhw3aqu.css" />
+
+    <style>
+        * {
+            font-family: 'proxima-nova';
+        }
+        
+        .background {
+            background-color: #f8fafc;
+        }
+        
+        .text-grey {
+            color: #606f7b;
+        }
+        
+        .text-grey-light {
+            color: #b8c2cc;
+        }
+        
+        .text-blue {
+            color: blue;
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+            /* border-radius: 0.25rem; */
+        }
+        
+        .list-none {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            color: #0069d9;
+        }
+    </style>
+</head>
+
+<body class="background">
+
+    <!-- Login -->
+    <div class="container my-3" id="loginpage">
+        <div class="row">
+            <div class="col-12 p-0 text-center">
+                <img src="/assets/security.svg" alt="" style="height:40%;" />
+                <h5 class="font-weight-light mb-3">You shall not pass, please verify your identity</h5>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <form onsubmit="login(event)">
+                            <div class="form-group">
+                                <label for="exampleInputEmail" class="text-left">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword" aria-describedby="emailHelp" placeholder="Enter password" />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full App -->
+    <div class="container my-3" id="homepage">
+        <nav class="navbar navbar-light bg-light">
+            <button class="btn btn-primary ml-auto" id="logout">
+        Logout
+      </button>
+        </nav>
+        <div class="row">
+
+            <!-- Add New Food -->
+            <div class="col-md-10" id="addfood">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="font-weight-light mb-3">Add New Food</h5>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control my-2" id="title" placeholder="Food name">
+                                    <input type="price" class="form-control my-2" id="price" placeholder="Price" min="0">
+                                    <div class="form-group my-2">
+                                        <textarea class="form-control" id="ingredients" rows="3" placeholder="Ingredients"></textarea>
+                                    </div>
+                                    <label for="tag">Choose food tag:</label>
+                                    <select class="form-control" id="tag">
+                    <option value="ayam">ayam</option>
+                    <option value="ikan">ikan</option>
+                    <option value="other">other</option>
+                  </select>
+                                </div>
+                                <div class="col-md-8 mx-auto mt-3"><button class="btn btn-primary btn-block" type="submit">Submit</button></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pb-0 col-12" id="foodlist">
+                <div class="card-body pb-0">
+                    <h3 class="font-weight-light">My Foods</h3>
+                </div>
+            </div>
+
+            <!-- List Food -->
+            <div class="col-md-10" id="listfood">
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
