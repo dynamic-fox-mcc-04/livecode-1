@@ -67,8 +67,27 @@ class UserController{
                             email: user.email,
                             access_token: token
                         })
+                    } else {
+                        res.status(400).json({
+                            code:400,
+                            name:'Bad Request',
+                            errors: [{message: 'Invalid email or password'}]
+                        })
                     }
+                } else {
+                    res.status(400).json({
+                        code:400,
+                        name:'Bad Request',
+                        errors: [{message: 'Invalid email or password'}]
+                    })
                 }
+            })
+            .catch(err => {
+                res.status(500).json({
+                    code:500,
+                    name:'Internal Server Error',
+                    errors: err
+                })
             })
     }
 }
