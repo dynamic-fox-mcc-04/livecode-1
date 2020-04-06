@@ -23,26 +23,30 @@ function auth(){
     }
 }
 
-$("#login-submit-button").click(
-    function login(event){
-    console.log("TEST!!")
-    event.preventDefault()
-    let email = $("#exampleInputEmail1").val();
-    let password = $('#exampleInputPassword').val();
-    $.ajax({
-        method: "POST",
-        url: baseURL + "/login",
-        data: {
-            email, password
-        }
-        .done(data => {
-            console.log(data)
-        })
-        .fail(error => {
-            res.status(500).json({
-                error
+function login(event){
+        event.preventDefault()
+        let email = $("#exampleInputEmail1").val();
+        let password = $('#exampleInputPassword').val();
+        $.ajax({
+            method: "POST",
+            url: baseURL + "/login",
+            data: {
+                email, password
+            }
+            .done(data => {
+                console.log(data)
             })
-        })
+            .fail(error => {
+                res.status(500).json({
+                    error
+                })
+            })
 
-    })
-})
+        })
+}
+
+function addFood( event ){
+    // form-control my-2
+    // form-control my-2
+    // form-control
+}

@@ -40,8 +40,8 @@ class userController {
                         id:result.id,
                         email:result.email
                     }
-                    console.log(payload, "PAYLOAD MASUK")
                     let token = generateToken(payload)
+                    localStorage.token = token
                     res.status(200).json({
                         access_token: token
                     })
