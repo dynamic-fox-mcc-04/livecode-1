@@ -1,0 +1,29 @@
+{
+  "name": "livecode-1",
+  "version": "1.0.0",
+  "description": "Pada live code kali ini, kamu diminta untuk membuat aplikasi\r menggunakan **client-server model**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" :"nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iguntop/livecode-1.git"
+  },
+  "author": "Guntoro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iguntop/livecode-1/issues"
+  },
+  "homepage": "https://github.com/iguntop/livecode-1#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.0.0",
+    "sequelize": "^5.21.6"
+  }
+}
