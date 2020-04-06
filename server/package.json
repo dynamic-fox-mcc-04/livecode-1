@@ -4,7 +4,8 @@
   "description": "Pada live code kali ini, kamu diminta untuk membuat aplikasi\r menggunakan **client-server model**.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" :"nodemon app.js"
   },
   "repository": {
     "type": "git",
