@@ -1,18 +1,37 @@
 const {User} = require('../models')
 const {hashPassword, checkPassword} = require('../helpers/bcrypt')
 const {createToken} = require('../helpers/jwt')
+const {customError} = require('../helpers/customError')
 
 let token
 
 class UserCtrl {
 
     static register(req, res, next) {
+
         console.log(">>> USER REGISTER");
         console.log(req.body);
 
-        return User.create({
-            email: req.body.email,
-            password: hashPassword(req.body.password)
+        return User.findOne({
+            where: {
+                email: req.body.email
+            }
+        })
+        .then(response => {
+            
+            if(response) {
+                console.log("DUPLICATE!");
+                throw new customError(400, 'EMAIL TAKEN')
+            } else {
+                
+                console.log("LET'S CREATE NEW ONE");
+                return User.create({
+                    email: req.body.email,
+                    password: hashPassword(req.body.password)
+                })
+
+            }
+
         })
         .then(response => {
             console.log("USER CREATED. NOW LOGGING IN");
@@ -25,7 +44,7 @@ class UserCtrl {
         })
         .catch(err => {
             console.log("ERROR REGISTERING");
-            return res.status(400).json({message: 'BAD REQUEST'})
+            next(err)
         })
     }
 
@@ -56,17 +75,17 @@ class UserCtrl {
 
                     } else {
                         console.log("LOGIN FAIL");
-                        return res.status(401).json({message: 'UNAUTHORIZED'})
+                        throw new customError(400, 'WRONG PASSWORD/EMAIL')
                     }
 
 
             } else {
-                return res.status(404).json({message: 'NOT FOUND'})
+                throw new customError(400, 'WRONG PASSWORD/EMAIL')
             }
         })
         .catch(err => {
             console.log("ERROR LOGIN");
-            return res.status(400).json({message: 'BAD REQUEST'})
+            next(err)
         })
 
     }

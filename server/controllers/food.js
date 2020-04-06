@@ -1,4 +1,5 @@
 const {Food, User} = require('../models')
+const {customError} = require('../helpers/customError')
 
 class FoodCtrl {
 
@@ -15,7 +16,7 @@ class FoodCtrl {
         })
         .catch(err => {
             console.log("ERROR FETCH ALL");
-            return res.status(500).json({message: 'INTERNAL SERVER ERROR'})
+            next(err)
         })
     }
 
@@ -33,13 +34,13 @@ class FoodCtrl {
                 return res.status(200).json(response)
             } else {
                 console.log("NOT FOUND");
-                return res.status(404).json({message: 'NOT FOUND'})
+                throw new customError(404, 'NOT FOUND')
             }
             
         })
         .catch(err => {
             console.log("ERROR FETCH ONE");
-            return res.status(500).json({message: 'INTERNAL SERVER ERROR'})
+            next(err)
         })
     }
 
@@ -61,16 +62,30 @@ class FoodCtrl {
         })
         .catch(err => {
             console.log("ERROR ADD FOOD");
-            return res.status(400).json({message: 'BAD REQUEST'})
+            next(err)
         })
     }
 
 
     static drop(req, res, next) {
         console.log("DROPPING ONE FOOD FROM MENU");
-        Food.destroy({
+        return Food.findOne({
             where: {
                 id: req.params.id
+            }
+        })
+        .then(response  => {
+            if(response) {
+
+                console.log("food found");
+                return Food.destroy({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+
+            } else {
+                throw new customError(404, 'NOT FOUND')
             }
         })
         .then(response => {
@@ -78,8 +93,8 @@ class FoodCtrl {
             res.status(200).json({message: 'Successfully delete food from your menu'})
         })
         .catch(err => {
-            console.log("ERROR DELETE ONE");
-            return res.status(400).json({message: 'BAD REQUEST'})
+            console.log("ERROR DELETING FOOD");
+            next(err)
         })
     }
 
