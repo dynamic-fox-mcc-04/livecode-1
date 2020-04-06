@@ -25,10 +25,10 @@ class Controller {
                     return res.status(200).json({
                         access_token: token
                     })
-                } else{
+                } else {
                     return next(err)
                 }
-            } else{
+            } else {
                 return next(err)
             }
         }).catch(err => {
@@ -81,17 +81,36 @@ class Controller {
     }
 
     static findAll(req, res, next) {
-        Food.findAll()
-            .then(data => {
+        Food.findAll({
+            where: {
+                'UserId': req.currentUserId
+            }
 
+        })
+            .then(data => {
+                if (data) {
+                    let foods = data
+                    res.status(200).json({
+                        foods
+                    })
+                }
+            }).catch(err => {
+                return next(err)
             })
     }
 
-    static update(req, res, next) {
 
-    }
     static delete(req, res, next) {
-        User.destroy()
+        let id = req.params.id
+        User.destroy(id)
+            .then(success => {
+                return res.status(200).json({
+                    message: "Successfully delete food from your menu"
+                })
+            })
+            .catch(err => {
+                return next(err)
+            })
     }
 }
 

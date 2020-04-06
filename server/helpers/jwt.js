@@ -9,7 +9,7 @@ function generateToken(payload) {
 
 
 function verify(token) {
-    return jwt.verify(token.process.env.SECRETTOKEN)
+    return jwt.verify(token, process.env.SECRETTOKEN)
 }
 
 module.exports = {
