@@ -8,7 +8,7 @@ function authorization(req, res, nex) {
         let decoded = decode(req.headers.access_token)
 
         Food.findOne({
-            where : { UserId : req.userId}
+            where : { UserId : req.userId }
         })
         .then(result => {
             if (result){
